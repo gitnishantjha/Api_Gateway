@@ -1,0 +1,21 @@
+port: 8080
+
+services:
+  - name: "product_service"
+    servers:
+      - "http://127.0.0.1:9001"
+      - "http://127.0.0.1:9002"
+  - name: "order_service"
+    servers:
+      - "http://127.0.0.1:9003"
+
+endpoints:
+  - path: "/api/products"
+    service: "product_service"
+    middlewares:
+      - "logging"
+      - "api_key_auth"
+  - path: "/api/orders"
+    service: "order_service"
+    middlewares:
+      - "logging"
